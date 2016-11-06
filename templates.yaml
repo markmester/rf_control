@@ -1,0 +1,3 @@
+device_on: Turning on {{ device }}
+
+device_off: Turning off {{ device }}

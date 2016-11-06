@@ -1,0 +1,22 @@
+{
+  "intents": [
+    {
+      "intent": "DeviceOn",
+      "slots": [
+        {
+          "name": "device",
+          "type": "DEVICES"
+        }
+      ]
+    },
+    {
+      "intent": "DeviceOff",
+      "slots": [
+        {
+          "name": "device",
+          "type": "DEVICES"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+DeviceOn Turn on {device}
+
+DeviceOff Turn off {device}
