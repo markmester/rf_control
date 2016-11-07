@@ -25,7 +25,7 @@ def device_on(device):
     device = get_device(device)
 
     cmd = "python3 rf_send.py {} -p {} -g {}".format(device['on_code'],
-                                                           device['pulse_width'],
+                                                           device['pulse_length'],
                                                            gpio_out)
 
     try:
@@ -42,7 +42,7 @@ def device_off(device):
     device = get_device(device)
 
     cmd = "python3 rf_send.py {} -p {} -g {}".format(device['off_code'],
-                                                           device['pulse_width'],
+                                                           device['pulse_length'],
                                                            gpio_out)
 
     try:
