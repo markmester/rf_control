@@ -1,0 +1,8 @@
+gpio_out: 26 # pin used to transmit rf codes
+devices: # devices
+    - device: lights
+      on_code: 5526835
+      off_code: 5526844
+      protocol: 1
+      pulse_length: 183
+      remote_key: 1 # number on remote corresponding to rf switch
