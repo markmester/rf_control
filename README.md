@@ -7,9 +7,12 @@
 
 ### Dependencies
 ```
-# apt install python3-pip
+# apt install python3-pip supervisor
 # pip3 install rpi-rf pyaml flask flask-ast
+
 ```
+_Run ```sudo ./install.sh``` to auto install dependencies and create log dirs/files_
+
 
 ### Setup
 ###### GPIO Pinouts
