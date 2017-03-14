@@ -10,7 +10,8 @@ echo "Installing dependencies..."
 echo "##########################"
 apt update
 apt install python3-pip supervisor unzip -y
-pip install rpi-rf pyaml flask flask-ast
+pip install pyaml flask flask-ast
+pip3 install rpi-rf
 
 echo "Unpacking ngrok..."
 echo "##################"
@@ -20,13 +21,13 @@ rm -rf ngrok-stable-linux-arm.zip
 echo "Creating logs..."
 echo "##################"
 mkdir /var/log/rf
-touch /var/log/rf/rf_control_stdout.log
-touch /var/log/rf/ngrok_stdout.log
+touch /var/log/rf/rf_control_stdout.log && touch /var/log/rf/rf_control_stderr.log
+touch /var/log/rf/ngrok_stdout.log && touch /var/log/rf/ngrok_stderr.log
 chown pi:pi /var/log/rf/*
 
 echo "Configuring supervisor..."
 echo "##################"
-cp config/rf_supervisor.conf /etc/supervisor/conf.d/
+cp config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 supervisord
 supervisorctl reload all
 supervisorctl start all
