@@ -33,12 +33,13 @@ RUN pip install setuptools wiringpi2 pyserial pyaml flask flask-ask pyparsing ap
 RUN pip3 install rpi-rf
 
 # clone repo
-RUN mkdir -p /opt
-WORKDIR /opt
-RUN git clone https://github.com/markmester/rf_control.git
+#RUN mkdir -p /opt
+#WORKDIR /opt
+#RUN git clone https://github.com/markmester/rf_control.git
 
 # Install grok
-RUN cd rf_control && unzip ngrok-stable-linux-arm.zip && rm -rf ngrok-stable-linux-arm.zip && chmod +x ngrok
+#RUN cd rf_control && unzip ngrok-stable-linux-arm.zip && rm -rf ngrok-stable-linux-arm.zip && chmod +x ngrok
+RUN unzip ngrok-stable-linux-arm.zip && rm -rf ngrok-stable-linux-arm.zip && chmod +x ngrok
 
 # create logs
 RUN mkdir /var/log/rf
@@ -47,7 +48,7 @@ RUN touch /var/log/rf/ngrok_stderr.log && touch /var/log/rf/ngrok_stdout.log
 RUN chmod 777 /var/log/rf/* 
 
 # setup supervisor
-RUN cp rf_control/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN cp config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Define working directory
 # WORKDIR /data
