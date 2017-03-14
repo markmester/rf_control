@@ -17,6 +17,7 @@ echo "Unpacking ngrok..."
 echo "##################"
 unzip ngrok-stable-linux-arm.zip
 rm -rf ngrok-stable-linux-arm.zip
+chmod +x ngrok
 
 echo "Creating logs..."
 echo "##################"

@@ -1,3 +1,7 @@
+# Run via: 
+#   docker run -d --name rf_control -p 5000 -p 4040 -ti rf_control
+#
+
 # Pull base image
 FROM resin/rpi-raspbian:jessie
 MAINTAINER Mark Mester <mmester6016@gmail.com>
@@ -34,7 +38,7 @@ WORKDIR /opt
 RUN git clone https://github.com/markmester/rf_control.git
 
 # Install grok
-RUN cd rf_control && unzip ngrok-stable-linux-arm.zip && rm -rf ngrok-stable-linux-arm.zip
+RUN cd rf_control && unzip ngrok-stable-linux-arm.zip && rm -rf ngrok-stable-linux-arm.zip && chmod +x ngrok
 
 # create logs
 RUN mkdir /var/log/rf
@@ -43,8 +47,7 @@ RUN touch /var/log/rf/ngrok_stderr.log && touch /var/log/rf/ngrok_stdout.log
 RUN chmod 777 /var/log/rf/* 
 
 # setup supervisor
-COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN supervisord && supervisorctl reload all
+RUN cp rf_control/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Define working directory
 # WORKDIR /data
