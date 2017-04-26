@@ -1,5 +1,7 @@
 # RPI RF Control
 
+!!!! NEEDS UPDATING
+
 ### Hardware
 - Raspbery Pi3
 - Etekcity Wireless Remote Control Electrical Outlet Switch

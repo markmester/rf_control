@@ -24,7 +24,7 @@ def device_on(device):
     on_msg = render_template('device_on', device=device)
     device = get_device(device)
 
-    cmd = "python3 rf_send.py {} -p {} -g {}".format(device['on_code'],
+    cmd = "python rf_send.py {} -p {} -g {}".format(device['on_code'],
                                                            device['pulse_length'],
                                                            gpio_out)
 
@@ -41,7 +41,7 @@ def device_off(device):
     off_msg = render_template('device_off', device=device)
     device = get_device(device)
 
-    cmd = "python3 rf_send.py {} -p {} -g {}".format(device['off_code'],
+    cmd = "python rf_send.py {} -p {} -g {}".format(device['off_code'],
                                                            device['pulse_length'],
                                                            gpio_out)
 

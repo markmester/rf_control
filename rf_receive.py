@@ -1,37 +1,31 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
+from pi_switch import RCSwitchReceiver
 import argparse
-import signal
-import sys
-import time
 import logging
-from rpi_rf import RFDevice
-
-rfdevice = None
-
-# pylint: disable=unused-argument
-def exithandler(signal, frame):
-    rfdevice.cleanup()
-    sys.exit(0)
 
 logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
-                    format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s', )
+                    format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s',)
 
-parser = argparse.ArgumentParser(description='Receives a decimal code via a 433/315MHz GPIO device')
-parser.add_argument('-g', dest='gpio', type=int, default=27,
-                    help="GPIO pin (Default: 27)")
+parser = argparse.ArgumentParser(description='Listens for rf codes via a 433/315MHz GPIO device')
+parser.add_argument('-g', dest='gpio', type=int, default=2,
+                    help="GPIO pin according to WiringPi pinout (Default: 17)")
 args = parser.parse_args()
 
-signal.signal(signal.SIGINT, exithandler)
-rfdevice = RFDevice(args.gpio)
-rfdevice.enable_rx()
-timestamp = None
-logging.info("Listening for codes on GPIO " + str(args.gpio))
+receiver = RCSwitchReceiver()
+receiver.enableReceive(args.gpio)
+
+num = 0
+
 while True:
-    if rfdevice.rx_code_timestamp != timestamp:
-        timestamp = rfdevice.rx_code_timestamp
-        logging.info(str(rfdevice.rx_code) +
-                     " [pulselength " + str(rfdevice.rx_pulselength) +
-                     ", protocol " + str(rfdevice.rx_proto) + "]")
-    time.sleep(0.01)
-rfdevice.cleanup()
+    if receiver.available():
+        received_value = receiver.getReceivedValue()
+        if received_value:
+            num += 1
+            print("Received[%s]:" % num)
+            print(received_value)
+            print("%s / %s bit" % (received_value, receiver.getReceivedBitlength()))
+            print("Protocol: %s" % receiver.getReceivedProtocol())
+            print("")
+
+        receiver.resetAvailable()

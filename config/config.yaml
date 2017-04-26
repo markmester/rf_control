@@ -3,6 +3,10 @@ devices: # devices
     - device: lights
       on_code: 5526835
       off_code: 5526844
-      protocol: 1
-      pulse_length: 183
+      pulse_length: 24
       remote_key: 1 # number on remote corresponding to rf switch
+    - device: fan
+      on_code: 5526979
+      off_code: 5526988
+      pulse_length: 24
+      remote_key: 2

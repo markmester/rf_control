@@ -6,7 +6,11 @@
 FROM resin/rpi-raspbian:jessie
 MAINTAINER Mark Mester <mmester6016@gmail.com>
 
-# Install dependencies
+# WiringPi
+RUN git clone git://git.drogon.net/wiringPi
+RUN cd wiringPi && ./build && cd ..
+
+# Apt dependencies
 RUN apt-get update && apt-get install -y \
 	git \
 	python3-pip \
@@ -25,14 +29,14 @@ RUN apt-get update && apt-get install -y \
     libpython2.7-dev \
     libssl-dev \
     libffi-dev \
+    libboost-python-dev \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
-RUN git clone git://git.drogon.net/wiringPi
-RUN cd wiringPi && ./build && cd ..
-RUN pip install setuptools wiringpi2 pyserial pyaml flask flask-ask pyparsing appdirs
-RUN pip3 install rpi-rf
 
-# clone repo
+# Pip dependencies
+RUN pip install pi_switch setuptools wiringpi2 pyserial pyaml flask flask-ask pyparsing appdirs
+
+# Clone repo
 RUN mkdir -p /opt
 WORKDIR /opt
 RUN git clone https://github.com/markmester/rf_control.git
