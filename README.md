@@ -20,15 +20,15 @@ _Run ```sudo ./install.sh``` to auto install dependencies and create log dirs/fi
 ###### GPIO Pinouts
 transmitter | pi
 - - - - - - - - -
-5V5 | 5V5
-GND | GND
-DATA | GPIO23
+5V5 | 5V5</br>
+GND | GND</br>
+DATA | GPIO23</br>
 
 receiver | pi
 - - - - - - - - -
-3V3 | 3V3
-GND | GND
-DATA | GPIO23
+3V3 | 3V3</br>
+GND | GND</br>
+DATA | GPIO23</br>
 
 1. Using the above pinout, hook up the rf receiver unit to the Raspberry Pi 3.
 2. Run the rf_receive.py script, press the on/off buttons on your rf switch remote, and record the code, pulse length, and protocol
